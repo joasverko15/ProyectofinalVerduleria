@@ -1,21 +1,45 @@
-import sys
-from PyQt5.QtWidgets import QApplication, QMainWindow
-from PyQt5.QtCore import pyqtSlot
+import sqlite3
 
-"""
-from Archivo convertido con pyside2-uic archivo.ui > interfaz.py
-import nombre de la clase del archivo convertido
-"""
-from interfaz import Ui_MainWindow
+class Comunicacion():
+    def __init__(self):
+        self.cononexion = sqlite3.connect ('base_datos.db')
 
-class MainWindow(QMainWindow):  #Clase MainWindow heredada de QMainWindow, que es una clase de PyQt para crear la ventana principal de la app.
-    def __init__(self): #constructor method. Se ejuecuta cuando la instancia de la clase es creada.
-        super().__init__() #llama al constructor de la clase QMainWindow, para inicializar las funcionalidades básicas de la ventana principal de la app.
-        self.ui = Ui_MainWindow() #crea una instancia de Ui_MainWindow class, la cual es la definición de la interfaz del usuario para la ventana principal.
-        self.ui.setupUi(self) #llama al método setupUi() de la instancia Ui_MainWindow, para setear los componenetes de la interfaz del usuario dentro de main window.
+    def inserta_producto(self,codigo, nombre, modelo, precio, cantidad):
+        cursor = self.conexion.cursor()
+        bd = '''INSERT INTO tabla_datos (CODIGO, NOMBRE, MODELO, PRECIO, CANTIDAD)
+        VALUES('{}','{}','{}','{}','{}')'''.format(codigo, nombre, modelo, precio, cantidad)
+        cursor.execute(bd)
+        self.conexion.commit()
+        cursor.close()
 
-if __name__ == "__main__": #checkea si el script está siendo ejecutado como el prog principal (no importado como un modulo).
-    app = QApplication(sys.argv)    # Crea un Qt widget, la cual va ser nuestra ventana.
-    window = MainWindow() #crea una intancia de MainWindow 
-    window.show()   # IMPORTANT!!!!! la ventanas estan ocultas por defecto.
-    sys.exit(app.exec_()) # Start the event loop.
+    def mostrar_producto(self):
+        cursor = self.conexion.cursor()
+        bd = "SELECT * FROM tabla_datos "
+        cursor.execute(bd)
+        registro = cursor.fetchall()
+        return registro
+
+    def busca_producto(self, nombre_producto):
+        cursor = self.conexion.cursor()
+        bd = '''SELECT * FROM tabla_datos WHERE NOMBRE = {}'''.format(nombre_producto)
+        cursor.execute(bd)
+        nombreX = cursor.fetchall()
+        cursor.close()
+        return nombreX
+    
+    def elimina_productos(self, nombre):
+        cursor = self.conexion.cursor()
+        bd = '''DELETE FROM tabla_datos WHERE NOMBRE = {}'''.format(nombre)
+        cursor.execute(bd)
+        self.conexion.commit()
+        cursor.close()
+
+    def actualiza_productos(self,Id, codigo, nombre, modelo, precio, cantidad):
+        cursor = self.conexion.cursor()
+        bd = '''UPDATE tabla_datos SET CODIGO = '{}', NOMBRE = '{}', MODELO = '{}', PRECIO = '{}', CANTIDAD = '{}'
+        WHERE ID = '{}' '''.format(codigo, nombre, modelo, precio, cantidad, Id)
+        cursor.execute(bd)
+        a = cursor.rowcount
+        self.conexion.commit()
+        cursor.close()
+        return a
