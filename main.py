@@ -1,45 +1,36 @@
-import sqlite3
+from PyQt5 import QtWidgets
+from MainWindow import Ui_MainWindow
+import sys
 
-class Comunicacion():
+class MainWindow(QtWidgets.QMainWindow):
     def __init__(self):
-        self.cononexion = sqlite3.connect ('base_datos.db')
+        super(MainWindow, self).__init__()
+        self.ui = Ui_MainWindow()
+        self.ui.setupUi(self)
 
-    def inserta_producto(self,codigo, nombre, modelo, precio, cantidad):
-        cursor = self.conexion.cursor()
-        bd = '''INSERT INTO tabla_datos (CODIGO, NOMBRE, MODELO, PRECIO, CANTIDAD)
-        VALUES('{}','{}','{}','{}','{}')'''.format(codigo, nombre, modelo, precio, cantidad)
-        cursor.execute(bd)
-        self.conexion.commit()
-        cursor.close()
+        self.ui.bt_stock.clicked.connect(self.show_stock_page)
+        self.ui.pushButton_2.clicked.connect(self.show_verduras_page)
+        self.ui.pushButton_3.clicked.connect(self.show_frutas_page)
+        self.ui.pushButton_4.clicked.connect(self.show_eliminar_page)
+        self.ui.pushButton_5.clicked.connect(self.show_carrito_page)
 
-    def mostrar_producto(self):
-        cursor = self.conexion.cursor()
-        bd = "SELECT * FROM tabla_datos "
-        cursor.execute(bd)
-        registro = cursor.fetchall()
-        return registro
+    def show_stock_page(self):
+        self.ui.stackedWidget.setCurrentWidget(self.ui.page_stock) 
 
-    def busca_producto(self, nombre_producto):
-        cursor = self.conexion.cursor()
-        bd = '''SELECT * FROM tabla_datos WHERE NOMBRE = {}'''.format(nombre_producto)
-        cursor.execute(bd)
-        nombreX = cursor.fetchall()
-        cursor.close()
-        return nombreX
-    
-    def elimina_productos(self, nombre):
-        cursor = self.conexion.cursor()
-        bd = '''DELETE FROM tabla_datos WHERE NOMBRE = {}'''.format(nombre)
-        cursor.execute(bd)
-        self.conexion.commit()
-        cursor.close()
+    def show_verduras_page(self):
+        self.ui.stackedWidget.setCurrentWidget(self.ui.page_verduras)
 
-    def actualiza_productos(self,Id, codigo, nombre, modelo, precio, cantidad):
-        cursor = self.conexion.cursor()
-        bd = '''UPDATE tabla_datos SET CODIGO = '{}', NOMBRE = '{}', MODELO = '{}', PRECIO = '{}', CANTIDAD = '{}'
-        WHERE ID = '{}' '''.format(codigo, nombre, modelo, precio, cantidad, Id)
-        cursor.execute(bd)
-        a = cursor.rowcount
-        self.conexion.commit()
-        cursor.close()
-        return a
+    def show_frutas_page(self):
+        self.ui.stackedWidget.setCurrentWidget(self.ui.page_frutas) 
+
+    def show_eliminar_page(self):
+        self.ui.stackedWidget.setCurrentWidget(self.ui.page_eliminar) 
+
+    def show_carrito_page(self):
+        self.ui.stackedWidget.setCurrentWidget(self.ui.page_carrito)     
+
+if __name__ == "__main__":
+    app = QtWidgets.QApplication(sys.argv)
+    window = MainWindow()
+    window.show()
+    sys.exit(app.exec_())
