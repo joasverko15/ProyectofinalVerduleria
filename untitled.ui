@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Sistema de Verdulería</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <widget class="QPushButton" name="bt_productos_venta">
+     <property name="text">
+      <string>Productos a Vender</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="bt_consultar_precio">
+     <property name="text">
+      <string>Consultar Precio Unitario</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="bt_compra_producto">
+     <property name="text">
+      <string>Compra de Productos</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="bt_datos_maestros">
+     <property name="text">
+      <string>Datos Maestros de Productos</string>
+     </property>
+    </widget>
+    <widget class="QTableWidget" name="tbl_productos">
+     <property name="columnCount">
+      <number>4</number>
+     </property>
+     <property name="rowCount">
+      <number>0</number>
+     </property>
+     <column>
+      <property name="text">
+       <string>Denominación</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Tipo</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Unidad de Medida</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Precio Unitario</string>
+      </property>
+     </column>
+    </widget>
+    <widget class="QTableWidget" name="tbl_compra_venta">
+     <property name="columnCount">
+      <number>8</number>
+     </property>
+     <property name="rowCount">
+      <number>0</number>
+     </property>
+     <column>
+      <property name="text">
+       <string>Fecha de Operación</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Tipo de Operación</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Denominación</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Tipo</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Unidad de Medida</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Cantidad</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Precio Unitario</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Precio Total</string>
+      </property>
+     </column>
+    </widget>
+   </layout>
+  </widget>
+  <menubar class="QMenuBar" name="menubar">
+   <addaction name="menuOpciones"/>
+  </menubar>
+  <statusbar class="QStatusBar" name="statusbar"/>
+  <action name="menuOpciones">
+   <property name="text">
+    <string>Opciones</string>
+   </property>
+   <addaction name="actionProductosAVender"/>
+   <addaction name="actionConsultarPrecio"/>
+   <addaction name="actionCompraProducto"/>
+   <addaction name="actionDatosMaestros"/>
+  </action>
+  <action name="actionProductosAVender">
+   <property name="text">
+    <string>Productos a Vender</string>
+   </property>
+  </action>
+  <action name="actionConsultarPrecio">
+   <property name="text">
+    <string>Consultar Precio Unitario</string>
+   </property>
+  </action>
+  <action name="actionCompraProducto">
+   <property name="text">
+    <string>Compra de Productos</string>
+   </property>
+  </action>
+  <action name="actionDatosMaestros">
+   <property name="text">
+    <string>Datos Maestros de Productos</string>
+   </property>
+  </action>
+ </widget>
+</ui>
