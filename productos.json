@@ -1,0 +1,15 @@
+[
+    {
+      "Denominacion": "Tomate",
+      "Tipo": "Hortaliza",
+      "UnidadMedida": "kg",
+      "PrecioUnitario": 40.0
+    },
+    {
+      "Denominacion": "Lechuga",
+      "Tipo": "Hortaliza",
+      "UnidadMedida": "unidad",
+      "PrecioUnitario": 15.0
+    }
+  ]
+  
